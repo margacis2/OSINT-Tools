@@ -1,70 +1,291 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:gravity="top|center"
-	android:layout_gravity="center|fill"
-	android:background="#FF2C2C2C">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dialog_rounded"
+    android:padding="20dp">
 
-	<LinearLayout
-		android:orientation="horizontal"
-		android:layout_width="match_parent"
-		android:layout_height="80dp">
+    <!-- Top Handle / Header Pill -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_category_badge"/>
 
-		<LinearLayout
-			android:orientation="vertical"
-			android:layout_width="0dp"
-			android:layout_weight="1"
-			android:layout_height="match_parent"
-			android:gravity="center"
-			android:padding="10dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
-			<ImageView
-				android:id="@+id/openImg"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:adjustViewBounds="true"
-				android:scaleType="fitCenter"
-				android:src="@drawable/default_icon"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-		</LinearLayout>
+            <!-- Tool Header Row: Icon + Title + Meta -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-		<TextView
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:layout_weight="4"
-			android:gravity="center"
-			android:textColor="#FFFFFFFF"
-			android:id="@+id/openTitle"
-			android:textStyle="bold"
-			android:typeface="monospace"
-			android:padding="10dp"
-			android:textSize="14sp"/>
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_icon_rounded"
+                    android:padding="8dp">
 
-	</LinearLayout>
+                    <ImageView
+                        android:id="@+id/openImg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="Tool Favicon"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/default_icon"/>
+                </FrameLayout>
 
-	<Button
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="Open in Browser"
-		android:id="@+id/openBrowser"
-		android:textStyle="bold"
-		android:typeface="monospace"
-		android:textColor="#FFFFFFFF"
-		android:backgroundTint="#FF0077FF"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-	<Button
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="Open in Here"
-		android:id="@+id/openHere"
-		android:typeface="monospace"
-		android:textStyle="bold"
-		android:textColor="#FFFFFFFF"
-		android:backgroundTint="#FF0077FF"/>
+                    <TextView
+                        android:id="@+id/openTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:lineSpacingExtra="2dp"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        tools:text="CheckUsernames Social Search"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/dialogDomain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="monospace"
+                            android:textColor="@color/accent_secondary"
+                            android:textSize="11sp"
+                            tools:text="checkusernames.com"/>
+
+                        <TextView
+                            android:id="@+id/dialogCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/bg_category_badge"
+                            android:paddingStart="6dp"
+                            android:paddingTop="2dp"
+                            android:paddingEnd="6dp"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="9sp"
+                            android:textStyle="bold"
+                            tools:text="Social &amp; Identity"/>
+                    </LinearLayout>
+
+                    <!-- Tool Type & Date Row -->
+                    <LinearLayout
+                        android:id="@+id/rowExtraMeta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/dialogToolType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_tertiary"
+                            android:textSize="10sp"
+                            tools:text="Web Service"/>
+
+                        <TextView
+                            android:id="@+id/dialogDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:textColor="@color/text_tertiary"
+                            android:textSize="10sp"
+                            tools:text="• Added: 2026-11-15"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- URL Card / Box -->
+            <LinearLayout
+                android:id="@+id/boxUrlPreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_icon_rounded"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_lock"
+                    android:contentDescription="SSL"/>
+
+                <TextView
+                    android:id="@+id/tvFullUrl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:ellipsize="middle"
+                    android:fontFamily="monospace"
+                    android:singleLine="true"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    tools:text="https://checkusernames.com/"/>
+
+                <ImageView
+                    android:id="@+id/btnQuickCopy"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Quick Copy"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_copy"
+                    app:tint="@color/accent_secondary"/>
+
+            </LinearLayout>
+
+            <!-- Quick Action Row: Copy, Share, Bookmark -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCopyUrl"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:text="Copy"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    app:cornerRadius="10dp"
+                    app:icon="@drawable/ic_copy"
+                    app:iconGravity="textStart"
+                    app:iconPadding="4dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/accent_secondary"
+                    app:strokeColor="@color/bg_card_stroke"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnShareUrl"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:text="Share"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    app:cornerRadius="10dp"
+                    app:icon="@drawable/ic_share"
+                    app:iconGravity="textStart"
+                    app:iconPadding="4dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/accent_primary"
+                    app:strokeColor="@color/bg_card_stroke"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDialogFavorite"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:text="Favorite"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    app:cornerRadius="10dp"
+                    app:icon="@drawable/ic_star_border"
+                    app:iconGravity="textStart"
+                    app:iconPadding="4dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/color_warning"
+                    app:strokeColor="@color/bg_card_stroke"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/bg_card_stroke"/>
+
+            <!-- Primary Action 1: Open in App Browser (openHere) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/openHere"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Open in Internal Browser"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/accent_primary"
+                app:cornerRadius="12dp"
+                app:elevation="3dp"
+                app:icon="@drawable/ic_open_internal"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconSize="20dp"
+                app:iconTint="#FFFFFF"/>
+
+            <!-- Primary Action 2: Open in External Browser (openBrowser) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/openBrowser"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:text="Open in External Browser"
+                android:textAllCaps="false"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_open_in_browser"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconSize="18dp"
+                app:iconTint="@color/text_secondary"
+                app:strokeColor="@color/bg_card_stroke"
+                app:strokeWidth="1dp"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
-
