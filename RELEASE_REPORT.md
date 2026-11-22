@@ -3,7 +3,9 @@
 > **Fork Maintainer:** [margacis2](https://github.com/margacis2)  
 > **Original Upstream:** [Gameye98/OSINT-Tools](https://github.com/Gameye98/OSINT-Tools)  
 > **Target Platform:** Android 5.0+ (API 21 to API 34)  
-> **Application Version:** 2.0 (Build 2)  
+> **Package Identity:** `com.margacis2.osinttools` (Upstream: `com.gameye98.osint`)  
+> **Application Label:** `OSINT Tools V2`  
+> **Application Version:** 2.0 (Build 6)  
 > **Artifacts Produced:** Signed Release APK (`app-release.apk`) & Debug APK (`app-debug.apk`)
 
 ---

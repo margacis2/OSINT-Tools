@@ -79,6 +79,12 @@ Intelligently organized taxonomy with real-time count badges on each category ch
 - Persistent Favorites system stored securely in local device preferences.
 - Tool details dialog with direct copy, system share, browser selection, and metadata badges.
 
+### 5. Independent Package Identity & Coexistence
+- **Package ID:** `com.margacis2.osinttools` (Upstream: `com.gameye98.osint`).
+- **Label:** `OSINT Tools V2`.
+- **Side-by-Side Coexistence:** Installs and operates as an independent app alongside the original Gameye98 release with isolated app data, cache, and settings.
+- **Custom V2 Launcher Icon:** Custom cyber-styled V2 shield and radar icon for easy visual distinction in the Android app drawer.
+
 ---
 
 ## Installation

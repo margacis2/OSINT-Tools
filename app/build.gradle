@@ -6,7 +6,7 @@ android {
     buildToolsVersion "34.0.0"
 
     defaultConfig {
-        applicationId "com.gameye98.osint"
+        applicationId "com.margacis2.osinttools"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 6
