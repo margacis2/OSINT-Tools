@@ -1,183 +1,137 @@
 # OSINT Tools V2
 
 <p align="center">
-  <strong>A modern Android directory for discovering Open-Source Intelligence resources.</strong><br />
-  Explore, search, organize, and access hundreds of publicly available OSINT resources from one application.
+  <b>A modern Android application for discovering and accessing Open-Source Intelligence (OSINT) resources.</b><br>
+  Search, explore, organize, and access hundreds of publicly available intelligence resources from one place.
 </p>
 
 <p align="center">
   <a href="https://github.com/margacis2/OSINT-Tools/releases">
-    <img src="https://img.shields.io/github/v/release/margacis2/OSINT-Tools?style=for-the-badge&color=6366F1" alt="Latest Release">
+    <img src="https://img.shields.io/github/v/release/margacis2/OSINT-Tools?style=flat-square&color=6366f1" alt="Latest Release">
   </a>
-  <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
-  <img src="https://img.shields.io/badge/Language-Java-orange?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
-  <img src="https://img.shields.io/badge/Minimum%20SDK-21-blue?style=for-the-badge" alt="Minimum SDK">
+  <a href="https://github.com/margacis2/OSINT-Tools/stargazers">
+    <img src="https://img.shields.io/github/stars/margacis2/OSINT-Tools?style=flat-square" alt="Stars">
+  </a>
+  <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Android">
+  <img src="https://img.shields.io/badge/Language-Java-orange?style=flat-square&logo=openjdk&logoColor=white" alt="Java">
   <a href="https://github.com/Gameye98/OSINT-Tools">
-    <img src="https://img.shields.io/badge/Original%20Project-Gameye98-06B6D4?style=for-the-badge" alt="Original Project">
+    <img src="https://img.shields.io/badge/Based%20on-Gameye98-blue?style=flat-square" alt="Original Project">
   </a>
 </p>
 
 ## Overview
 
-OSINT Tools V2 is a redesigned and expanded version of the original Android application by [Gameye98](https://github.com/Gameye98/OSINT-Tools).
+OSINT Tools V2 is a redesigned and expanded fork of the original [Gameye98/OSINT-Tools](https://github.com/Gameye98/OSINT-Tools) Android project.
 
-The application brings together a curated directory of publicly accessible OSINT websites and resources. It helps users discover useful services for researching publicly available information across different investigative areas.
+It provides a categorized directory of publicly accessible OSINT websites and investigation resources. Instead of manually searching for individual services, users can browse resources by category, search for specific tools, save favorites, and open websites through an integrated browser.
 
-This fork focuses on improving the Android experience through:
-- A redesigned, modern interface.
-- An organized directory with 30 categories.
-- Search and filtering.
-- Local favorites.
-- An integrated WebView browser.
-- An expanded collection of OSINT resources.
-- A separate Android package identity so the original application can remain installed.
-
-**Original project:** [Gameye98/OSINT-Tools](https://github.com/Gameye98/OSINT-Tools)  
-**Fork maintainer:** [margacis2](https://github.com/margacis2)
+This version focuses on improving the Android user experience, organizing resources, and making the application easier to navigate.
 
 ---
 
 ## Screenshots
 
-The following filenames are the intended names for the cropped screenshots. Ensure they match the actual files committed to `screenshots/`.
-
 <p align="center">
-  <img src="screenshots/home-screen.png" width="250" alt="Home screen">
-  <br>
-  <strong>Home Screen</strong>
+  <img src="screenshots/home-screen.png" width="170" alt="Home Screen">
+  <img src="screenshots/category-filters.png" width="170" alt="Categories">
+  <img src="screenshots/favorites-screen.png" width="170" alt="Favorites">
+</p>
+<p align="center">
+  <sub><b>Home</b></sub> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <sub><b>Categories</b></sub> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <sub><b>Favorites</b></sub>
 </p>
 
 <p align="center">
-  <img src="screenshots/category-filters.png" width="250" alt="OSINT category filters">
-  <br>
-  <strong>OSINT Categories</strong>
+  <img src="screenshots/tool-details.png" width="170" alt="Tool Details">
+  <img src="screenshots/internal-browser.png" width="170" alt="Internal Browser">
+  <img src="screenshots/about-screen.png" width="170" alt="About Screen">
 </p>
-
 <p align="center">
-  <img src="screenshots/favorites-screen.png" width="250" alt="Favorites screen">
-  <br>
-  <strong>Favorites</strong>
-</p>
-
-<p align="center">
-  <img src="screenshots/tool-details.png" width="250" alt="Tool details">
-  <br>
-  <strong>Tool Details</strong>
-</p>
-
-<p align="center">
-  <img src="screenshots/internal-browser.png" width="250" alt="Integrated browser">
-  <br>
-  <strong>Internal Browser</strong>
-</p>
-
-<p align="center">
-  <img src="screenshots/about-screen.png" width="250" alt="About screen">
-  <br>
-  <strong>About</strong>
+  <sub><b>Tool Details</b></sub> &nbsp;&nbsp;&nbsp;&nbsp;
+  <sub><b>Browser</b></sub> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <sub><b>About</b></sub>
 </p>
 
 ---
 
 ## Features
 
-### 1. Modern Android Interface
-- Material Design-inspired cyber-intelligence appearance.
-- Dark navy interface with indigo and cyan accents.
+### Modern Android Interface
+- Redesigned application interface.
+- Dark-themed visual design.
 - Responsive tool cards and adaptive grid layout.
-- RecyclerView-based list rendering.
-- Improved scrolling and icon caching.
-- Clear search and empty-result states.
+- RecyclerView-based resource display.
+- Improved navigation and filtering experience.
+- Resource icons and visual details.
 
-### 2. OSINT Directory
-The application includes 962 resource records:
+### OSINT Resource Directory
+- 932 records in the original resource directory.
+- 30 additional resource records.
+- 962 total resource records across both data files.
+- Resource names, website addresses, and available icons.
+- Support for multiple category assignments.
 
-| Collection | Records |
+### Search and Filtering
+- Search resources by name.
+- Search by website URL and domain.
+- Filter resources by category.
+- Display matching resource counts.
+- Reset filters and clear searches.
+
+### Categories
+The application provides 27 investigative categories:
+
+| Category | Category |
 | :--- | :--- |
-| Original directory (`siteurl.dat`) | 932 |
-| Additional resources (`recent_tools.dat`) | 30 |
-| **Total** | **962** |
+| People Search | Social Media Intelligence |
+| Username Investigation | Email Intelligence |
+| Phone Number Intelligence | Domain Intelligence |
+| DNS & Subdomain Enumeration | IP Address Intelligence |
+| Network Reconnaissance | Geolocation Intelligence |
+| Maps & Satellite Intelligence | Image Intelligence |
+| Reverse Image Search | Video & Media Intelligence |
+| Metadata Analysis | Dark Web Monitoring Resources |
+| Threat Intelligence | Malware Analysis Resources |
+| Data Breach Research | Digital Forensics |
+| Archive & Historical Research | Search Engines & Google Dorks |
+| Cryptocurrency Intelligence | Company & Business Intelligence |
+| Public Records Research | Developer & Code Intelligence |
+| General Investigation Tools | |
 
-Resources are linked to their respective external websites. The application acts as a directory and does not own or operate those third-party services.
-
-### 3. Thirty Investigation Categories
-Browse resources using dedicated category filters:
-- People Search
-- Social Media Intelligence
-- Username Investigation
-- Email Intelligence
-- Phone Number Intelligence
-- Domain Intelligence
-- DNS & Subdomain Enumeration
-- IP Address Intelligence
-- Network Reconnaissance
-- Geolocation Intelligence
-- Maps & Satellite Intelligence
-- Image Intelligence
-- Reverse Image Search
-- Video & Media Intelligence
-- Metadata Analysis
-- Dark Web Monitoring Resources
-- Threat Intelligence
-- Malware Analysis Resources
-- Data Breach Research
-- Digital Forensics
-- Archive & Historical Research
-- Search Engines & Google Dorks
-- Cryptocurrency Intelligence
-- Company & Business Intelligence
-- Public Records Research
-- Developer & Code Intelligence
-- General Investigation Tools
-
-The category interface also includes:
+Additional navigation filters:
 - All Tools
 - Recently Added
 - Favorites
 
-Category membership can overlap, allowing a resource to appear in multiple relevant categories.
+### Favorites
+- Save useful OSINT resources.
+- Remove saved resources.
+- Access favorites from a dedicated filter.
+- Store favorites locally on the device.
 
-### 4. Search and Filtering
-- Search by resource name.
-- Search by website address and domain.
-- Combine text search with category filtering.
-- View the number of matching resources.
-- Reset filters when needed.
+### Resource Details
+- View resource name and domain.
+- View the complete website address.
+- See available category and resource information.
+- Copy website URLs.
+- Share URLs using Android sharing.
+- Add or remove favorites.
+- Open resources internally or externally.
 
-### 5. Favorites
-- Save useful resources to Favorites.
-- Remove resources from Favorites.
-- Manage favorites locally on the device.
-- Access saved resources through the Favorites category.
-
-### 6. Tool Information and Quick Actions
-The resource details interface provides:
-- Resource name and domain.
-- Full website address.
-- Category and resource type information.
-- Copy URL.
-- Share URL through Android's sharing interface.
-- Add or remove Favorites.
-- Open using the integrated browser.
-- Open using an external browser.
-
-### 7. Integrated Browser
-The built-in Android WebView browser includes:
-- Modern browser navigation interface.
-- Page title and website address.
-- Loading progress indicator.
+### Integrated Browser
+- Built-in Android WebView browser.
+- Page loading progress.
+- Website title and URL display.
 - Back and forward navigation.
-- Reload and retry controls.
+- Reload and retry functionality.
 - Desktop browsing mode.
 - File upload support.
 - DownloadManager integration.
-- PDF printing and export through Android PrintManager.
-- Handling for supported external links and application intents.
+- External application link handling.
 - WebView renderer-crash recovery and error handling.
 
-*The browser depends on the external website, Android WebView, and network availability. Some websites may restrict embedded browsers or require their own authentication.*
-
-### 8. Recently Added Resources
+### Recently Added Resources
 An additional collection of 30 resources is maintained separately in `recent_tools.dat`.
 
 Examples include:
@@ -186,70 +140,59 @@ Examples include:
 - Have I Been Pwned
 - Intelligence X
 - urlscan.io
-- OSINT Framework
 - CyberChef
 - Web-Check
 - Shodan
 - Censys
 - VirusTotal
-- BGP Toolkit
-- Bellingcat Investigation Toolkit
-- FotoForensics
-- Aperi'Solve
-- SunCalc
-- Breadcrumbs
-- Etherscan
 - Sherlock
 - Maigret
-- Blackbird
-- Social Analyzer
-- Toutatis
-- Sublist3r
-- OWASP Amass
 - PhoneInfoga
-- Osintgram
 - SpiderFoot
-- OCCRP Aleph
-
-*These resources are third-party projects and services. Their availability, features, and access requirements may change independently.*
 
 ---
 
-## App Identity
+## Resource Statistics
 
-OSINT Tools V2 uses a separate Android application ID.
+| Resource collection | Records |
+| :--- | :--- |
+| Original directory | 932 |
+| Additional resources | 30 |
+| **Total** | **962** |
 
-| Property | Value |
+*The counts represent records in the application's bundled resource files, not necessarily 962 unique services.*
+
+---
+
+## App Information
+
+| Property | Details |
 | :--- | :--- |
 | Application name | OSINT Tools V2 |
 | Package ID | `com.margacis2.osinttools` |
 | Original package ID | `com.gameye98.osint` |
-| Version name | 2.0 |
-| Version code | 6 |
-| Minimum Android SDK | 21 |
-| Target Android SDK | 34 |
-| Programming language | Java |
+| Platform | Android |
+| Language | Java |
+| Minimum SDK | 21 |
+| Target SDK | 34 |
 | Java compatibility | Java 17 |
 
-Because the application IDs are different, the V2 application can be installed alongside the original Gameye98 application without replacing it.
+*Separate installation: OSINT Tools V2 uses a different application ID from the original Gameye98 application. Both applications can therefore be installed independently on the same Android device.*
 
 ---
 
-## Installation
+## Download and Installation
 
-### Download
-1. Visit the repository's [GitHub Releases](https://github.com/margacis2/OSINT-Tools/releases) page to find available builds.
-2. Download the release APK.
-3. Open the downloaded APK on your Android device.
-4. Allow installation from the relevant source if Android requests permission.
+Get the available APK builds from:  
+👉 **[Download OSINT Tools V2 — GitHub Releases](https://github.com/margacis2/OSINT-Tools/releases)**
+
+1. Open the Releases page.
+2. Download the available APK.
+3. Open the APK on your Android device.
+4. Allow installation from the relevant source if prompted.
 5. Install and launch OSINT Tools V2.
 
-*The original Gameye98 app does not need to be uninstalled.*
-
-### Compatibility
-- Android 5.0 (Lollipop) and later.
-- Internet connection required to access external OSINT websites.
-- Individual websites may have their own account, subscription, regional, or API requirements.
+*The original Gameye98 application does not need to be uninstalled.*
 
 ---
 
@@ -257,10 +200,9 @@ Because the application IDs are different, the V2 application can be installed a
 
 ### Requirements
 - JDK 17
-- Android SDK
+- Android Studio or Android SDK
 - Android SDK Platform 34
-- Android Build Tools 34.0.0
-- Gradle Wrapper included in the project
+- Gradle Wrapper included in the repository
 
 ### Clone the repository
 ```bash
@@ -298,7 +240,7 @@ cd OSINT-Tools
 ./gradlew assembleRelease
 ```
 
-### APK output locations
+### APK output
 ```text
 app/build/outputs/apk/
 ├── debug/
@@ -306,6 +248,8 @@ app/build/outputs/apk/
 └── release/
     └── app-release.apk
 ```
+
+*A release build may require the appropriate signing configuration.*
 
 ---
 
@@ -315,33 +259,26 @@ app/build/outputs/apk/
 OSINT-Tools/
 │
 ├── app/
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── assets/
-│   │   │   │   ├── siteurl.dat
-│   │   │   │   ├── recent_tools.dat
-│   │   │   │   ├── user_agent.txt
-│   │   │   │   └── icons/
-│   │   │   │
-│   │   │   ├── java/
-│   │   │   │   └── com/gameye98/osint/
-│   │   │   │       ├── MainActivity.java
-│   │   │   │       ├── Browser.java
-│   │   │   │       ├── OsintTool.java
-│   │   │   │       ├── ToolAdapter.java
-│   │   │   │       ├── FavoritesManager.java
-│   │   │   │       ├── IconManager.java
-│   │   │   │       └── PermissionUtils.java
-│   │   │   │
-│   │   │   └── res/
-│   │   │       ├── drawable/
-│   │   │       ├── layout/
-│   │   │       └── values/
-│   │   │
-│   │   └── test/
-│   │
-│   ├── build.gradle
-│   └── proguard-rules.pro
+│   └── src/
+│       ├── main/
+│       │   ├── assets/
+│       │   │   ├── siteurl.dat
+│       │   │   ├── recent_tools.dat
+│       │   │   ├── user_agent.txt
+│       │   │   └── icons/
+│       │   │
+│       │   ├── java/
+│       │   │   └── com/gameye98/osint/
+│       │   │       ├── MainActivity.java
+│       │   │       ├── Browser.java
+│       │   │       ├── OsintTool.java
+│       │   │       ├── ToolAdapter.java
+│       │   │       ├── FavoritesManager.java
+│       │   │       └── IconManager.java
+│       │   │
+│       │   └── res/
+│       │
+│       └── test/
 │
 ├── screenshots/
 ├── build.gradle
@@ -355,41 +292,40 @@ OSINT-Tools/
 
 ## Responsible Use
 
-This application provides convenient access to publicly available information resources.
+OSINT Tools V2 provides access to third-party information resources. Users are responsible for how they use these resources.
 
-Please:
-- Use OSINT resources only for lawful and authorized research.
-- Respect privacy, applicable laws, and website terms of service.
+- Conduct investigations only for lawful and authorized purposes.
+- Respect privacy and applicable laws.
+- Follow the terms of service of third-party websites.
 - Do not use these resources for harassment, stalking, unauthorized access, or other harmful activities.
-- Verify information using reliable sources before drawing conclusions.
-- Respect the individual terms, licenses, and usage restrictions of third-party tools.
+- Verify information before relying on it.
 
-*The application is a directory of external resources. It does not guarantee the accuracy, availability, safety, or legality of third-party services.*
+*This application does not own or operate the listed third-party services and does not guarantee their availability, accuracy, or reliability.*
 
 ---
 
 ## Credits and Acknowledgements
 
 This project is based on the original work of:
-- **Original author:** [Gameye98](https://github.com/Gameye98)
+- **Original developer:** [Gameye98](https://github.com/Gameye98)
 - **Original repository:** [Gameye98/OSINT-Tools](https://github.com/Gameye98/OSINT-Tools)
 - **Original community:** [BlackHole Security](https://github.com/BlackHoleSecurity)
 - **Fork maintainer and modifications:** [margacis2](https://github.com/margacis2)
 
-All original authors and contributors retain credit for their respective work.
+All original contributors retain credit for their respective work.
 
-This repository is a modified fork, not an official release from the original project maintainer.
+*OSINT Tools V2 is an independently maintained modification of the original project and is not an official release from Gameye98.*
 
 ---
 
 ## License
 
-The upstream README displays an MIT license badge. However, a LICENSE file was not present in the upstream or fork repository when this README was prepared.
+The upstream README displays an MIT license badge, but a license file was not verified in the repositories inspected for this README.
 
-Please consult the original project maintainer and add the applicable license text before redistributing this modified project.
+Please verify the original project's licensing terms and include the applicable license text before distributing this modified version.
 
 <p align="center">
-  <strong>OSINT Tools V2</strong><br>
+  <b>OSINT Tools V2</b><br>
   Maintained by <a href="https://github.com/margacis2">margacis2</a><br>
-  Based on the original work by Gameye98 and BlackHole Security.
+  Based on the original project by Gameye98.
 </p>
