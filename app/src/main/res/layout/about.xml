@@ -113,6 +113,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"/>
 
+            <!-- Dedicated Button: Credits to OSP & Creator Attribution -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOspCredits"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="14dp"
+                android:text="Credits to OSP &amp; Creator Attribution"
+                android:textAllCaps="false"
+                android:textColor="@color/accent_secondary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_github"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconSize="18dp"
+                app:iconTint="@color/accent_secondary"
+                app:strokeColor="@color/accent_secondary"
+                app:strokeWidth="1dp"/>
+
             <!-- Close Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAboutClose"

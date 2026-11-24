@@ -271,9 +271,13 @@ public class SiteStatusManager {
      * Sorts tools:
      * 1. Working sites on top, dead links on below.
      * 2. Within each status group, favorites come first.
-     * 3. Secondary sort by title alphabetically.
+     * 3. Secondary sort by addedDate if sortByRecent is true, else alphabetical by title.
      */
     public void sortTools(List<OsintTool> tools) {
+        sortTools(tools, false);
+    }
+
+    public void sortTools(List<OsintTool> tools, final boolean sortByRecent) {
         if (tools == null || tools.size() <= 1) return;
 
         Collections.sort(tools, new Comparator<OsintTool>() {
@@ -292,6 +296,16 @@ public class SiteStatusManager {
                 // Within same status, favorites first
                 if (t1.isFavorite() != t2.isFavorite()) {
                     return t1.isFavorite() ? -1 : 1;
+                }
+
+                // If sorting by recent, newest addedDate first
+                if (sortByRecent) {
+                    String d1 = t1.getAddedDate() != null ? t1.getAddedDate() : "";
+                    String d2 = t2.getAddedDate() != null ? t2.getAddedDate() : "";
+                    if (!d1.isEmpty() || !d2.isEmpty()) {
+                        int dateComp = d2.compareTo(d1); // descending
+                        if (dateComp != 0) return dateComp;
+                    }
                 }
 
                 // Alphabetical

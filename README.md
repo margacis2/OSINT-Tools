@@ -80,8 +80,8 @@ This version focuses on improving the Android user experience, organizing resour
 
 ### OSINT Resource Directory
 - 932 records in the original resource directory.
-- 30 additional resource records.
-- 962 total resource records across both data files.
+- 40 additional modern open data and intelligence resource records.
+- 972 total resource records across both data files.
 - Resource names, website addresses, and available icons.
 - Support for multiple category assignments.
 
@@ -145,7 +145,7 @@ Additional navigation filters:
 - WebView renderer-crash recovery and error handling.
 
 ### Recently Added Resources
-An additional collection of 30 resources is maintained separately in `recent_tools.dat`.
+An additional collection of 40 resources is maintained separately in `recent_tools.dat`.
 
 Examples include:
 - WhatsMyName
@@ -162,6 +162,16 @@ Examples include:
 - Maigret
 - PhoneInfoga
 - SpiderFoot
+- Archive.today / Archive.ph
+- ViewDNS.info
+- Kumu Network Analysis
+- OpenSanctions
+- CIRCL Hashlookup
+- Carrot2
+- LittleSis
+- Wiby Open Web Search
+- World Bank Open Data
+- Transparency International
 
 ---
 
@@ -170,8 +180,8 @@ Examples include:
 | Resource collection | Records |
 | :--- | :--- |
 | Original directory | 932 |
-| Additional resources | 30 |
-| **Total** | **962** |
+| Additional modern resources | 40 |
+| **Total** | **972** |
 
 *The counts represent records in the application's bundled resource files, not necessarily 962 unique services.*
 

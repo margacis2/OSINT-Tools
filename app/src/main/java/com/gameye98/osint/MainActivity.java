@@ -148,9 +148,10 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
             }
         }
 
-        // Sort: Working sites on top, dead links on below!
+        // Sort: Working sites on top, dead links on below (newest first for Recently Added)!
         if (siteStatusManager != null) {
-            siteStatusManager.sortTools(displayedTools);
+            boolean isRecent = currentCategory.equals("Recently Added");
+            siteStatusManager.sortTools(displayedTools, isRecent);
         }
 
         // Update modern RecyclerView
@@ -560,13 +561,16 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
         TextView title = parent.findViewById(R.id.title);
         title.setText("OSINT Tools v2.0.1");
 
+        TextView tvAboutVersion = parent.findViewById(R.id.tvAboutVersion);
+        if (tvAboutVersion != null) {
+            tvAboutVersion.setText("v2.0.1 • " + allTools.size() + " Curated Tools");
+        }
+
         TextView content = parent.findViewById(R.id.content);
         String[] contents = {
-                "Curated cyber-intelligence and OSINT directory aggregating 960+ verified security and investigation tools across 30 specialized domains.",
+                "Curated cyber-intelligence and OSINT directory aggregating 970+ verified security and investigation tools across 30 specialized domains.",
                 "\n• Forked & Maintained by: margacis2",
                 "• Original Concept & Project by: Gameye98 & BlackHole Security",
-                "• Featured Open Source: Web-Check by @Lissy93 (https://github.com/Lissy93/web-check)",
-                "• Open Source Community Credits: sherlock-project, soxoj (maigret), p1ngul1n0, megadose, owasp-amass, sundowndev, and the global OSINT research community.",
                 "• License: MIT Open Source License"
         };
         content.setText(String.join("\n", contents));
@@ -574,8 +578,6 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
         final String[] urls = {
                 "https://github.com/margacis2/OSINT-Tools",
                 "https://github.com/margacis2",
-                "https://github.com/Lissy93/web-check",
-                "https://web-check.xyz",
                 "https://github.com/Gameye98/OSINT-Tools",
                 "https://github.com/Gameye98",
                 "https://github.com/BlackHoleSecurity",
@@ -584,8 +586,6 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
         final String[] urlinfo = {
                 "Fork Repository (margacis2/OSINT-Tools)",
                 "Fork Maintainer Profile (margacis2)",
-                "Web-Check GitHub Repo (@Lissy93)",
-                "Web-Check Live Portal (web-check.xyz)",
                 "Original Upstream (Gameye98/OSINT-Tools)",
                 "Original Author Profile (Gameye98)",
                 "BlackHole Security GitHub",
@@ -657,6 +657,16 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
             container.addView(linkCard);
         }
 
+        View btnOspCredits = parent.findViewById(R.id.btnOspCredits);
+        if (btnOspCredits != null) {
+            btnOspCredits.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showOspCreditsDialog();
+                }
+            });
+        }
+
         builder.setView(parent);
         final AlertDialog aboutDialog = builder.create();
         if (aboutDialog.getWindow() != null) {
@@ -674,6 +684,148 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
         }
 
         aboutDialog.show();
+    }
+
+    public void showOspCreditsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_osp_credits, null, false);
+
+        LinearLayout container = dialogView.findViewById(R.id.ospCreditsContainer);
+        if (container != null) {
+            container.removeAllViews();
+
+            final String[][] CREATORS = new String[][]{
+                {"@Lissy93 (Alicia Sykes)", "Web-Check", "All-in-one website reconnaissance & OSINT suite", "https://github.com/Lissy93/web-check"},
+                {"@sherlock-project", "Sherlock", "Hunt down social media usernames across 400+ sites", "https://github.com/sherlock-project/sherlock"},
+                {"@soxoj", "Maigret", "Collect dossiers on persons from 3,000+ sites", "https://github.com/soxoj/maigret"},
+                {"@p1ngul1n0", "Blackbird", "Fast OSINT search engine for usernames across platforms", "https://github.com/p1ngul1n0/blackbird"},
+                {"@qeeqbox", "Social Analyzer", "Profile intelligence & analysis API for social platforms", "https://github.com/qeeqbox/social-analyzer"},
+                {"@megadose", "Toutatis / Holehe / Ignorant", "Instagram, email and phone number OSINT extractors", "https://github.com/megadose"},
+                {"@aboul3la", "Sublist3r", "Fast subdomain enumeration tool using multiple engines", "https://github.com/aboul3la/Sublist3r"},
+                {"@owasp-amass", "OWASP Amass", "In-depth attack surface mapping and asset discovery", "https://github.com/owasp-amass/amass"},
+                {"@sundowndev", "PhoneInfoga", "Advanced phone number information gathering engine", "https://github.com/sundowndev/PhoneInfoga"},
+                {"@Datalux", "Osintgram", "Interactive Instagram reconnaissance framework", "https://github.com/Datalux/Osintgram"},
+                {"@smicallef", "SpiderFoot", "Automated OSINT intelligence gathering platform", "https://github.com/smicallef/spiderfoot"},
+                {"@laramies", "theHarvester", "Email, subdomain and employee reconnaissance", "https://github.com/laramies/theHarvester"},
+                {"@lanmaster53", "Recon-ng", "Full-featured modular web reconnaissance framework", "https://github.com/lanmaster53/recon-ng"},
+                {"@mxrch", "GHunt", "Google Account OSINT and reconnaissance tool", "https://github.com/mxrch/GHunt"},
+                {"@gchq", "CyberChef", "Cyber Swiss Army knife for decoding, analysis & hashing", "https://github.com/gchq/CyberChef"},
+                {"@WebBreacher", "WhatsMyName", "Fast username enumeration across hundreds of sites", "https://github.com/WebBreacher/WhatsMyName"},
+                {"@troyhunt", "Have I Been Pwned", "Data breach search engine & credential exposure check", "https://github.com/troyhunt"},
+                {"@m8r0wn", "CrossLinked", "LinkedIn organization employee enumeration tool", "https://github.com/m8r0wn/CrossLinked"},
+                {"@pixelbubble", "ProtOSINT", "Protonmail and ProtonVPN investigation tool", "https://github.com/pixelbubble/ProtOSINT"},
+                {"@zidansec", "CloudPeler", "CrimeFlare Cloudflare WAF bypass & real IP locator", "https://github.com/zidansec/CloudPeler"},
+                {"@ICWR-TEAM", "BigDorker", "Automated Google Dorking tool for reconnaissance", "https://github.com/ICWR-TEAM/BigDorker"},
+                {"@martinvigo", "Mailcat", "Email enumeration and OSINT reconnaissance", "https://github.com/martinvigo/mailcat"},
+                {"@zuxu4n", "Rosint", "Reddit open-source user intelligence tool", "https://github.com/zuxu4n/Rosint"},
+                {"@cipher387", "OSINT Collections", "Collections of online OSINT tools and dorks lists", "https://github.com/cipher387/osint_stuff_tool_collection"},
+                {"@jivoi", "Awesome OSINT", "Curated community list of amazing OSINT resources", "https://github.com/jivoi/awesome-osint"},
+                {"@edoardottt", "Awesome Hacker Search Engines", "Curated list of hacker & pentesting search engines", "https://github.com/edoardottt/awesome-hacker-search-engines"},
+                {"@ItIsMeCall911", "Awesome Telegram OSINT", "Curated Telegram intelligence tools and resources", "https://github.com/ItIsMeCall911/Awesome-Telegram-OSINT"},
+                {"@davidkowalk", "Twitter Geolocate", "Search Twitter and tweets by geographic location", "https://github.com/davidkowalk/twitter_geolocate"}
+            };
+
+            for (final String[] item : CREATORS) {
+                final String author = item[0];
+                final String toolName = item[1];
+                final String desc = item[2];
+                final String repoUrl = item[3];
+
+                MaterialCardView card = new MaterialCardView(this);
+                LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                cardParams.setMargins(0, (int) (4 * density), 0, (int) (4 * density));
+                card.setLayoutParams(cardParams);
+                card.setCardBackgroundColor(ContextCompat.getColor(this, R.color.bg_secondary));
+                card.setStrokeColor(ContextCompat.getColor(this, R.color.bg_card_stroke));
+                card.setStrokeWidth(1);
+                card.setRadius(10 * density);
+                card.setClickable(true);
+                card.setFocusable(true);
+
+                LinearLayout row = new LinearLayout(this);
+                row.setOrientation(LinearLayout.VERTICAL);
+                row.setPadding((int) (14 * density), (int) (10 * density), (int) (14 * density), (int) (10 * density));
+
+                LinearLayout topRow = new LinearLayout(this);
+                topRow.setOrientation(LinearLayout.HORIZONTAL);
+                topRow.setGravity(Gravity.CENTER_VERTICAL);
+
+                ImageView icon = new ImageView(this);
+                icon.setImageResource(R.drawable.ic_github);
+                icon.setColorFilter(ContextCompat.getColor(this, R.color.accent_secondary));
+                LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams((int) (16 * density), (int) (16 * density));
+                iconParams.setMarginEnd((int) (8 * density));
+                icon.setLayoutParams(iconParams);
+
+                TextView tvTool = new TextView(this);
+                LinearLayout.LayoutParams toolParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+                tvTool.setLayoutParams(toolParams);
+                tvTool.setText(toolName);
+                tvTool.setTextColor(Color.WHITE);
+                tvTool.setTextSize(13);
+                tvTool.setTypeface(null, android.graphics.Typeface.BOLD);
+
+                TextView tvAuthor = new TextView(this);
+                tvAuthor.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_category_badge));
+                tvAuthor.setText(author);
+                tvAuthor.setTextColor(ContextCompat.getColor(this, R.color.accent_secondary));
+                tvAuthor.setTextSize(10);
+                tvAuthor.setTypeface(null, android.graphics.Typeface.BOLD);
+                tvAuthor.setPadding((int) (6 * density), (int) (2 * density), (int) (6 * density), (int) (2 * density));
+
+                topRow.addView(icon);
+                topRow.addView(tvTool);
+                topRow.addView(tvAuthor);
+
+                TextView tvDesc = new TextView(this);
+                LinearLayout.LayoutParams descParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                descParams.setMargins((int) (24 * density), (int) (3 * density), 0, 0);
+                tvDesc.setLayoutParams(descParams);
+                tvDesc.setText(desc);
+                tvDesc.setTextColor(ContextCompat.getColor(this, R.color.text_secondary));
+                tvDesc.setTextSize(11);
+
+                row.addView(topRow);
+                row.addView(tvDesc);
+                card.addView(row);
+
+                card.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(repoUrl));
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            Toast.makeText(MainActivity.this, "Cannot open link", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                container.addView(card);
+            }
+        }
+
+        builder.setView(dialogView);
+        final AlertDialog ospDialog = builder.create();
+        if (ospDialog.getWindow() != null) {
+            ospDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+
+        View btnClose = dialogView.findViewById(R.id.btnOspCreditsClose);
+        if (btnClose != null) {
+            btnClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ospDialog.dismiss();
+                }
+            });
+        }
+
+        ospDialog.show();
     }
 
     @Override
