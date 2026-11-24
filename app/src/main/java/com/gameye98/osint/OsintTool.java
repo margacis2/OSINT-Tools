@@ -417,6 +417,110 @@ public class OsintTool implements Serializable {
                 return true;
             }
         }
+
+        try {
+            SiteStatusManager mgr = SiteStatusManager.getInstance(null);
+            if (mgr != null) {
+                SiteStatus status = mgr.getStatus(url);
+                if (status != null && status.getDisplayName().toLowerCase().contains(q)) {
+                    return true;
+                }
+                PricingType pricing = mgr.getPricing(url);
+                if (pricing != null && pricing.getDisplayName().toLowerCase().contains(q)) {
+                    return true;
+                }
+            }
+        } catch (Exception ignored) {}
+
+        String author = getAuthorUsername();
+        if (!author.isEmpty() && author.toLowerCase().contains(q)) {
+            return true;
+        }
+
         return false;
+    }
+
+    public String getAuthorUsername() {
+        if (url == null || url.isEmpty()) return "";
+        String lowerUrl = url.toLowerCase();
+
+        if (lowerUrl.contains("github.com/")) {
+            int idx = lowerUrl.indexOf("github.com/");
+            String path = url.substring(idx + 11);
+            String[] parts = path.split("/");
+            if (parts.length > 0 && !parts[0].isEmpty()) {
+                return parts[0];
+            }
+        }
+
+        if (lowerUrl.contains("gitlab.com/")) {
+            int idx = lowerUrl.indexOf("gitlab.com/");
+            String path = url.substring(idx + 11);
+            String[] parts = path.split("/");
+            if (parts.length > 0 && !parts[0].isEmpty()) {
+                return parts[0];
+            }
+        }
+
+        if (lowerUrl.contains("web-check.xyz")) {
+            return "Lissy93";
+        }
+        if (lowerUrl.contains("whatsmyname.app")) {
+            return "WebBreacher";
+        }
+        if (lowerUrl.contains("cyberchef.org")) {
+            return "gchq";
+        }
+        if (lowerUrl.contains("haveibeenpwned.com")) {
+            return "troyhunt";
+        }
+
+        if (title != null && title.contains("by ")) {
+            int byIdx = title.lastIndexOf("by ");
+            String authorPart = title.substring(byIdx + 3).trim();
+            int endIdx = authorPart.indexOf(" ");
+            if (endIdx != -1) {
+                authorPart = authorPart.substring(0, endIdx);
+            }
+            authorPart = authorPart.replaceAll("[\\(\\)\\[\\]\\-:]", "").trim();
+            if (!authorPart.isEmpty()) {
+                return authorPart.startsWith("@") ? authorPart.substring(1) : authorPart;
+            }
+        }
+
+        return "";
+    }
+
+    public String getRepositoryUrl() {
+        if (url == null || url.isEmpty()) return "";
+        String lowerUrl = url.toLowerCase();
+
+        if (lowerUrl.contains("github.com/") || lowerUrl.contains("gitlab.com/")) {
+            return url;
+        }
+
+        if (lowerUrl.contains("web-check.xyz")) {
+            return "https://github.com/Lissy93/web-check";
+        }
+        if (lowerUrl.contains("whatsmyname.app")) {
+            return "https://github.com/WebBreacher/WhatsMyName";
+        }
+        if (lowerUrl.contains("cyberchef.org")) {
+            return "https://github.com/gchq/CyberChef";
+        }
+        if (lowerUrl.contains("haveibeenpwned.com")) {
+            return "https://github.com/troyhunt";
+        }
+
+        String author = getAuthorUsername();
+        if (!author.isEmpty()) {
+            return "https://github.com/" + author;
+        }
+
+        return "";
+    }
+
+    public boolean hasOpenSourceAttribution() {
+        return !getAuthorUsername().isEmpty();
     }
 }

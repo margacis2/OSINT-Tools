@@ -59,11 +59,24 @@ This version focuses on improving the Android user experience, organizing resour
 
 ### Modern Android Interface
 - Redesigned application interface.
-- Dark-themed visual design.
+- Dark cyber-intelligence visual design with smooth layout animations.
 - Responsive tool cards and adaptive grid layout.
-- RecyclerView-based resource display.
+- RecyclerView-based resource display with cascade entrance transitions.
 - Improved navigation and filtering experience.
 - Resource icons and visual details.
+
+### Parallel Site Health Checker & Live Classification (New in v2.0.1)
+- High-speed 24-worker parallel site verification engine.
+- Instant health detection: **Online (HTTP 2xx/3xx)**, **Protected / Login Wall (Cloudflare/WAF 401/403/429/503)**, and **Offline / Dead Links**.
+- Intelligent automatic sorting: **Working sites on top, dead links on bottom**.
+- Automated execution when the application is updated.
+- Real-time pricing model classification: **Free**, **Freemium**, and **Open Source**.
+- In-dialog live re-check trigger for individual websites.
+
+### Open Source Creator & Maintainer Attribution (New in v2.0.1)
+- Dedicated creator attribution badges in the tool details dialog.
+- Highlights repository authors with their GitHub `@username` and direct repository links.
+- Full community attribution for open-source tools included in the directory.
 
 ### OSINT Resource Directory
 - 932 records in the original resource directory.
@@ -312,7 +325,42 @@ This project is based on the original work of:
 - **Original community:** [BlackHole Security](https://github.com/BlackHoleSecurity)
 - **Fork maintainer and modifications:** [margacis2](https://github.com/margacis2)
 
-All original contributors retain credit for their respective work.
+### Open Source Projects & Creator Attributions
+
+We extend our sincere gratitude and credit to the open-source creators and maintainers whose tools, repositories, and intelligence frameworks are featured in this application:
+
+| Tool / Framework | Creator / Maintainer | Repository / Resource |
+| :--- | :--- | :--- |
+| **Web-Check** | [@Lissy93](https://github.com/Lissy93) (Alicia Sykes) | [Lissy93/web-check](https://github.com/Lissy93/web-check) • [web-check.xyz](https://web-check.xyz) |
+| **Sherlock** | [@sherlock-project](https://github.com/sherlock-project) | [sherlock-project/sherlock](https://github.com/sherlock-project/sherlock) |
+| **Maigret** | [@soxoj](https://github.com/soxoj) | [soxoj/maigret](https://github.com/soxoj/maigret) |
+| **Blackbird** | [@p1ngul1n0](https://github.com/p1ngul1n0) | [p1ngul1n0/blackbird](https://github.com/p1ngul1n0/blackbird) |
+| **Social Analyzer** | [@qeeqbox](https://github.com/qeeqbox) | [qeeqbox/social-analyzer](https://github.com/qeeqbox/social-analyzer) |
+| **Toutatis / Holehe / Ignorant** | [@megadose](https://github.com/megadose) | [megadose](https://github.com/megadose) |
+| **Sublist3r** | [@aboul3la](https://github.com/aboul3la) | [aboul3la/Sublist3r](https://github.com/aboul3la/Sublist3r) |
+| **OWASP Amass** | [@owasp-amass](https://github.com/owasp-amass) | [owasp-amass/amass](https://github.com/owasp-amass/amass) |
+| **PhoneInfoga** | [@sundowndev](https://github.com/sundowndev) | [sundowndev/PhoneInfoga](https://github.com/sundowndev/PhoneInfoga) |
+| **Osintgram** | [@Datalux](https://github.com/Datalux) | [Datalux/Osintgram](https://github.com/Datalux/Osintgram) |
+| **SpiderFoot** | [@smicallef](https://github.com/smicallef) | [smicallef/spiderfoot](https://github.com/smicallef/spiderfoot) |
+| **theHarvester** | [@laramies](https://github.com/laramies) | [laramies/theHarvester](https://github.com/laramies/theHarvester) |
+| **Recon-ng** | [@lanmaster53](https://github.com/lanmaster53) | [lanmaster53/recon-ng](https://github.com/lanmaster53/recon-ng) |
+| **GHunt** | [@mxrch](https://github.com/mxrch) | [mxrch/GHunt](https://github.com/mxrch/GHunt) |
+| **CyberChef** | [@gchq](https://github.com/gchq) | [gchq/CyberChef](https://github.com/gchq/CyberChef) • [cyberchef.org](https://cyberchef.org) |
+| **WhatsMyName** | [@WebBreacher](https://github.com/WebBreacher) | [WebBreacher/WhatsMyName](https://github.com/WebBreacher/WhatsMyName) • [whatsmyname.app](https://whatsmyname.app) |
+| **Have I Been Pwned** | [@troyhunt](https://github.com/troyhunt) | [troyhunt](https://github.com/troyhunt) • [haveibeenpwned.com](https://haveibeenpwned.com) |
+| **Fierce** | [@mschwager](https://github.com/mschwager) | [mschwager/fierce](https://github.com/mschwager/fierce) |
+| **Mailcat** | [@martinvigo](https://github.com/martinvigo) | [martinvigo/mailcat](https://github.com/martinvigo/mailcat) |
+| **CrossLinked** | [@m8r0wn](https://github.com/m8r0wn) | [m8sec/CrossLinked](https://github.com/m8r0wn/CrossLinked) |
+| **ProtOSINT** | [@pixelbubble](https://github.com/pixelbubble) | [pixelbubble/ProtOSINT](https://github.com/pixelbubble/ProtOSINT) |
+| **CloudPeler** | [@zidansec](https://github.com/zidansec) | [zidansec/CloudPeler](https://github.com/zidansec/CloudPeler) |
+| **BigDorker** | [@ICWR-TEAM](https://github.com/ICWR-TEAM) | [ICWR-TEAM/BigDorker](https://github.com/ICWR-TEAM/BigDorker) |
+| **Rosint** | [@zuxu4n](https://github.com/zuxu4n) | [zuxu4n/Rosint](https://github.com/zuxu4n/Rosint) |
+| **Awesome OSINT** | [@jivoi](https://github.com/jivoi) | [jivoi/awesome-osint](https://github.com/jivoi/awesome-osint) |
+| **Awesome Hacker Search Engines** | [@edoardottt](https://github.com/edoardottt) | [edoardottt/awesome-hacker-search-engines](https://github.com/edoardottt/awesome-hacker-search-engines) |
+| **Awesome Telegram OSINT** | [@ItIsMeCall911](https://github.com/ItIsMeCall911) | [ItIsMeCall911/Awesome-Telegram-OSINT](https://github.com/ItIsMeCall911/Awesome-Telegram-OSINT) |
+| **OSINT Stuff Tool Collection** | [@cipher387](https://github.com/cipher387) | [cipher387/osint_stuff_tool_collection](https://github.com/cipher387/osint_stuff_tool_collection) |
+
+All original contributors and repository maintainers retain full copyright and credit for their respective works.
 
 *OSINT Tools V2 is an independently maintained modification of the original project and is not an official release from Gameye98.*
 

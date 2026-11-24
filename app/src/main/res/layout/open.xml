@@ -173,6 +173,147 @@
 
             </LinearLayout>
 
+            <!-- Site Health & Status Card -->
+            <LinearLayout
+                android:id="@+id/cardSiteHealth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_icon_rounded"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/dialogStatusDot"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/bg_status_dot"/>
+
+                    <TextView
+                        android:id="@+id/dialogStatusText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/color_status_working"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tools:text="Online (HTTP 200 OK)"/>
+
+                    <TextView
+                        android:id="@+id/dialogPricingText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_pricing_badge"
+                        android:paddingStart="6dp"
+                        android:paddingTop="2dp"
+                        android:paddingEnd="6dp"
+                        android:paddingBottom="2dp"
+                        android:textColor="@color/accent_secondary"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        tools:text="Free / Open Source"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/dialogLastChecked"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/text_tertiary"
+                        android:textSize="10sp"
+                        tools:text="Checked: Just now"/>
+
+                    <TextView
+                        android:id="@+id/btnRecheckStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:padding="4dp"
+                        android:text="↻ Recheck"
+                        android:textColor="@color/accent_primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Open Source Creator / Author Attribution Card -->
+            <LinearLayout
+                android:id="@+id/cardAuthorAttribution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_icon_rounded"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/imgAuthorIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="GitHub Author"
+                    android:src="@drawable/ic_github"
+                    app:tint="@color/text_primary"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open Source Creator"
+                        android:textColor="@color/text_tertiary"
+                        android:textSize="9sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvAuthorUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/accent_secondary"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tools:text="@Lissy93 (web-check)"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/btnViewRepo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_category_badge"
+                    android:paddingStart="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="4dp"
+                    android:text="GitHub ↗"
+                    android:textColor="@color/text_primary"
+                    android:textSize="10sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
             <!-- Quick Action Row: Copy, Share, Bookmark -->
             <LinearLayout
                 android:layout_width="match_parent"

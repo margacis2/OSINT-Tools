@@ -18,8 +18,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +62,13 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
     private String currentQuery = "";
     private FavoritesManager favoritesManager;
     private IconManager iconManager;
+    private SiteStatusManager siteStatusManager;
+
+    private LinearLayout layoutHealthCheckProgress;
+    private ProgressBar healthProgressBar;
+    private TextView tvHealthProgressText;
+    private TextView btnStopCheck;
+    private ImageButton btnRefreshHealth;
 
     // 30 Comprehensive OSINT Categories with intuitive icons
     public static final String[][] CATEGORIES = new String[][]{
@@ -137,6 +146,11 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
             if (currentQuery.isEmpty() || tool.matches(currentQuery)) {
                 displayedTools.add(tool);
             }
+        }
+
+        // Sort: Working sites on top, dead links on below!
+        if (siteStatusManager != null) {
+            siteStatusManager.sortTools(displayedTools);
         }
 
         // Update modern RecyclerView
@@ -316,6 +330,68 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
         // Load Icon
         iconManager.loadIcon(this, tool.getIconName(), openImg);
 
+        // Health Status & Pricing in Dialog
+        final View dialogStatusDot = dialogView.findViewById(R.id.dialogStatusDot);
+        final TextView dialogStatusText = dialogView.findViewById(R.id.dialogStatusText);
+        final TextView dialogPricingText = dialogView.findViewById(R.id.dialogPricingText);
+        final TextView dialogLastChecked = dialogView.findViewById(R.id.dialogLastChecked);
+        final TextView btnRecheckStatus = dialogView.findViewById(R.id.btnRecheckStatus);
+
+        updateDialogHealth(tool, dialogStatusDot, dialogStatusText, dialogPricingText, dialogLastChecked);
+
+        // Open Source Author Attribution in Dialog
+        final View cardAuthorAttribution = dialogView.findViewById(R.id.cardAuthorAttribution);
+        final TextView tvAuthorUsername = dialogView.findViewById(R.id.tvAuthorUsername);
+        final TextView btnViewRepo = dialogView.findViewById(R.id.btnViewRepo);
+
+        if (cardAuthorAttribution != null && tvAuthorUsername != null) {
+            final String author = tool.getAuthorUsername();
+            final String repoUrl = tool.getRepositoryUrl();
+            if (!author.isEmpty()) {
+                cardAuthorAttribution.setVisibility(View.VISIBLE);
+                tvAuthorUsername.setText("@" + author);
+                if (btnViewRepo != null) {
+                    btnViewRepo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(repoUrl));
+                                startActivity(intent);
+                            } catch (Exception e) {
+                                Toast.makeText(MainActivity.this, "Cannot open repository link", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            } else {
+                cardAuthorAttribution.setVisibility(View.GONE);
+            }
+        }
+
+        if (btnRecheckStatus != null) {
+            btnRecheckStatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    btnRecheckStatus.setEnabled(false);
+                    btnRecheckStatus.setText("Checking...");
+                    if (dialogStatusText != null) {
+                        dialogStatusText.setText("Testing connection...");
+                    }
+                    siteStatusManager.recheckSite(tool.getUrl(), new SiteStatusManager.SingleCheckListener() {
+                        @Override
+                        public void onResult(SiteCheckResult result) {
+                            btnRecheckStatus.setEnabled(true);
+                            btnRecheckStatus.setText("↻ Recheck");
+                            updateDialogHealth(tool, dialogStatusDot, dialogStatusText, dialogPricingText, dialogLastChecked);
+                            if (toolAdapter != null) {
+                                toolAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
         // Setup Favorite state in dialog
         final boolean isFav = favoritesManager.isFavorite(tool.getUrl());
         if (btnDialogFavorite != null) {
@@ -405,19 +481,92 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
         dialog.show();
     }
 
+    private void updateDialogHealth(OsintTool tool, View dot, TextView tvStatus, TextView tvPricing, TextView tvLastChecked) {
+        if (siteStatusManager == null || tool == null) return;
+
+        SiteCheckResult res = siteStatusManager.getResult(tool.getUrl());
+        SiteStatus status = res != null ? res.getStatus() : siteStatusManager.getStatus(tool.getUrl());
+        PricingType pricing = res != null ? res.getPricing() : siteStatusManager.getPricing(tool.getUrl());
+        int httpCode = res != null ? res.getHttpCode() : 0;
+        long lastChecked = res != null ? res.getLastCheckedTimestamp() : 0;
+
+        if (tvStatus != null) {
+            String codeStr = httpCode > 0 ? " (HTTP " + httpCode + ")" : "";
+            switch (status) {
+                case WORKING:
+                    tvStatus.setText("Online" + codeStr);
+                    tvStatus.setTextColor(ContextCompat.getColor(this, R.color.color_status_working));
+                    if (dot != null) dot.setBackgroundResource(R.drawable.bg_status_dot);
+                    break;
+                case BLOCKED_OR_LOGIN:
+                    tvStatus.setText("Protected / Login Wall" + codeStr);
+                    tvStatus.setTextColor(ContextCompat.getColor(this, R.color.color_status_blocked));
+                    if (dot != null) dot.setBackgroundColor(ContextCompat.getColor(this, R.color.color_status_blocked));
+                    break;
+                case DEAD:
+                    tvStatus.setText("Offline / Dead Link" + codeStr);
+                    tvStatus.setTextColor(ContextCompat.getColor(this, R.color.color_status_dead));
+                    if (dot != null) dot.setBackgroundColor(ContextCompat.getColor(this, R.color.color_status_dead));
+                    break;
+                case TIMEOUT:
+                    tvStatus.setText("Connection Timeout");
+                    tvStatus.setTextColor(ContextCompat.getColor(this, R.color.color_status_timeout));
+                    if (dot != null) dot.setBackgroundColor(ContextCompat.getColor(this, R.color.color_status_timeout));
+                    break;
+                case ERROR:
+                    tvStatus.setText("Server Error" + codeStr);
+                    tvStatus.setTextColor(ContextCompat.getColor(this, R.color.color_status_dead));
+                    if (dot != null) dot.setBackgroundColor(ContextCompat.getColor(this, R.color.color_status_dead));
+                    break;
+                case PENDING:
+                default:
+                    tvStatus.setText("Pending Verification");
+                    tvStatus.setTextColor(ContextCompat.getColor(this, R.color.color_status_pending));
+                    if (dot != null) dot.setBackgroundColor(ContextCompat.getColor(this, R.color.color_status_pending));
+                    break;
+            }
+        }
+
+        if (tvPricing != null) {
+            if (pricing != null && pricing != PricingType.UNKNOWN) {
+                tvPricing.setVisibility(View.VISIBLE);
+                tvPricing.setText(pricing.getDisplayName());
+            } else {
+                tvPricing.setVisibility(View.GONE);
+            }
+        }
+
+        if (tvLastChecked != null) {
+            if (lastChecked > 0) {
+                long diff = System.currentTimeMillis() - lastChecked;
+                if (diff < 60000) {
+                    tvLastChecked.setText("Checked: Just now");
+                } else if (diff < 3600000) {
+                    tvLastChecked.setText("Checked: " + (diff / 60000) + " min ago");
+                } else {
+                    tvLastChecked.setText("Checked: " + (diff / 3600000) + " hrs ago");
+                }
+            } else {
+                tvLastChecked.setText("Not yet checked");
+            }
+        }
+    }
+
     public void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         View parent = inflater.inflate(R.layout.about, null, false);
 
         TextView title = parent.findViewById(R.id.title);
-        title.setText("OSINT Tools v2.0");
+        title.setText("OSINT Tools v2.0.1");
 
         TextView content = parent.findViewById(R.id.content);
         String[] contents = {
                 "Curated cyber-intelligence and OSINT directory aggregating 960+ verified security and investigation tools across 30 specialized domains.",
                 "\n• Forked & Maintained by: margacis2",
                 "• Original Concept & Project by: Gameye98 & BlackHole Security",
+                "• Featured Open Source: Web-Check by @Lissy93 (https://github.com/Lissy93/web-check)",
+                "• Open Source Community Credits: sherlock-project, soxoj (maigret), p1ngul1n0, megadose, owasp-amass, sundowndev, and the global OSINT research community.",
                 "• License: MIT Open Source License"
         };
         content.setText(String.join("\n", contents));
@@ -425,6 +574,8 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
         final String[] urls = {
                 "https://github.com/margacis2/OSINT-Tools",
                 "https://github.com/margacis2",
+                "https://github.com/Lissy93/web-check",
+                "https://web-check.xyz",
                 "https://github.com/Gameye98/OSINT-Tools",
                 "https://github.com/Gameye98",
                 "https://github.com/BlackHoleSecurity",
@@ -433,6 +584,8 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
         final String[] urlinfo = {
                 "Fork Repository (margacis2/OSINT-Tools)",
                 "Fork Maintainer Profile (margacis2)",
+                "Web-Check GitHub Repo (@Lissy93)",
+                "Web-Check Live Portal (web-check.xyz)",
                 "Original Upstream (Gameye98/OSINT-Tools)",
                 "Original Author Profile (Gameye98)",
                 "BlackHole Security GitHub",
@@ -547,6 +700,7 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
         density = getResources().getDisplayMetrics().density;
         favoritesManager = FavoritesManager.getInstance(this);
         iconManager = IconManager.getInstance();
+        siteStatusManager = SiteStatusManager.getInstance(this);
 
         permissions = new PermissionUtils(this);
         permissions.checkAllPermissions();
@@ -565,6 +719,73 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
         tvToolCountBadge = findViewById(R.id.tvToolCountBadge);
         btnResetFilter = findViewById(R.id.btnResetFilter);
         btnClearSearch = findViewById(R.id.btnClearSearch);
+
+        layoutHealthCheckProgress = findViewById(R.id.layoutHealthCheckProgress);
+        healthProgressBar = findViewById(R.id.healthProgressBar);
+        tvHealthProgressText = findViewById(R.id.tvHealthProgressText);
+        btnStopCheck = findViewById(R.id.btnStopCheck);
+        btnRefreshHealth = findViewById(R.id.btnRefreshHealth);
+
+        if (btnStopCheck != null) {
+            btnStopCheck.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    siteStatusManager.stopChecking();
+                    if (layoutHealthCheckProgress != null) {
+                        layoutHealthCheckProgress.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
+
+        if (btnRefreshHealth != null) {
+            btnRefreshHealth.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startHealthCheck();
+                }
+            });
+        }
+
+        siteStatusManager.addListener(new SiteStatusManager.HealthCheckListener() {
+            private long lastAdapterUpdate = 0;
+
+            @Override
+            public void onProgress(int completed, int total, SiteCheckResult result) {
+                if (layoutHealthCheckProgress != null) {
+                    layoutHealthCheckProgress.setVisibility(View.VISIBLE);
+                }
+                if (healthProgressBar != null && total > 0) {
+                    healthProgressBar.setProgress((completed * 100) / total);
+                }
+                if (tvHealthProgressText != null) {
+                    tvHealthProgressText.setText("Checking site health: " + completed + "/" + total + "...");
+                }
+                long now = System.currentTimeMillis();
+                if (toolAdapter != null && (now - lastAdapterUpdate > 1200 || completed >= total)) {
+                    lastAdapterUpdate = now;
+                    toolAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onComplete(int workingCount, int deadCount) {
+                if (tvHealthProgressText != null) {
+                    tvHealthProgressText.setText("Health check complete: " + workingCount + " online");
+                }
+                applyFilter();
+                if (layoutHealthCheckProgress != null) {
+                    layoutHealthCheckProgress.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (layoutHealthCheckProgress != null && !siteStatusManager.isChecking()) {
+                                layoutHealthCheckProgress.setVisibility(View.GONE);
+                            }
+                        }
+                    }, 3000);
+                }
+            }
+        });
 
         ImageButton btnAppInfo = findViewById(R.id.btnAppInfo);
         if (btnAppInfo != null) {
@@ -684,9 +905,25 @@ public class MainActivity extends AppCompatActivity implements ToolAdapter.OnToo
             }
 
             filterSites(".");
+
+            // Trigger health check if app was newly installed/updated or first launch
+            if (siteStatusManager != null && siteStatusManager.shouldCheckOnLaunch()) {
+                startHealthCheck();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void startHealthCheck() {
+        if (allTools.isEmpty() || siteStatusManager == null) return;
+        if (layoutHealthCheckProgress != null) {
+            layoutHealthCheckProgress.setVisibility(View.VISIBLE);
+        }
+        if (tvHealthProgressText != null) {
+            tvHealthProgressText.setText("Starting site health check...");
+        }
+        siteStatusManager.startHealthCheck(allTools);
     }
 
     @Override

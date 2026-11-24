@@ -99,20 +99,59 @@
             android:textStyle="bold"
             tools:text="CheckUsernames Social Account Tracker"/>
 
-        <!-- Domain -->
-        <TextView
-            android:id="@+id/tvToolDomain"
+        <!-- Domain & Status Row -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:ellipsize="end"
-            android:fontFamily="monospace"
-            android:maxLines="1"
-            android:textColor="@color/accent_secondary"
-            android:textSize="10sp"
-            tools:text="checkusernames.com"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <!-- Bottom Row: Category Badge & Tool Type -->
+            <TextView
+                android:id="@+id/tvToolDomain"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="monospace"
+                android:maxLines="1"
+                android:textColor="@color/accent_secondary"
+                android:textSize="10sp"
+                tools:text="checkusernames.com"/>
+
+            <!-- Health Status Badge -->
+            <LinearLayout
+                android:id="@+id/layoutStatusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_status_working"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="6dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="2dp">
+
+                <View
+                    android:id="@+id/dotStatus"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:background="@drawable/bg_status_dot"/>
+
+                <TextView
+                    android:id="@+id/tvStatusText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="@color/color_status_working"
+                    android:textSize="8sp"
+                    android:textStyle="bold"
+                    tools:text="Online"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Bottom Row: Category Badge & Pricing Badge & Tool Type -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -136,6 +175,25 @@
                 android:textSize="9sp"
                 android:textStyle="bold"
                 tools:text="Social &amp; Identity"/>
+
+            <TextView
+                android:id="@+id/tvPricingBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/bg_pricing_badge"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingStart="5dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/accent_secondary"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="Open Source"
+                tools:visibility="visible"/>
 
             <TextView
                 android:id="@+id/tvToolTypeBadge"
